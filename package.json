@@ -1,0 +1,29 @@
+{
+  "name": "brailling-website",
+  "version": "0.0.0",
+  "description": "Website for Brailling project",
+  "main": "src/app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brailling/website.git"
+  },
+  "author": "Guilherme de Marchi",
+  "license": "SEE LICENSE IN \"LICENSE\" FILE",
+  "bugs": {
+    "url": "https://github.com/brailling/website/issues"
+  },
+  "homepage": "https://github.com/brailling/website#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.1",
+    "nodemon": "^2.0.15"
+  }
+}

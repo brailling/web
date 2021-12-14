@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use('/public', express.static(path.resolve('src/www/public')))
 
-const routes = require('./routes/index')
-app.use(routes)
+require('./routes')(app)
+require('./controllers')(app)
 
 app.listen(8000)
