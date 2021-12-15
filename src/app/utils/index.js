@@ -1,5 +1,5 @@
 const fileUtils = require('./file')
-const tokenUtils = require('./token')
+const timeUtils = require('./time')
 
-exports.File = fileUtils
-exports.Token = tokenUtils
+exports.FileUtils = fileUtils
+exports.TimeUtils = timeUtils

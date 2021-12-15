@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken')
 
-const authConfig = require('../config/auth')
+const { TimeUtils } = require('../utils')
 
-module.exports = (req, res, next) => {
-    const authHeader = req.headers.authorization
+function verifyToken(req, res, next, secret, callback) {
+    const authorization = req.headers.authorization
 
-    if (!authHeader)
+    if (!authorization)
         return res.status(401).send({ error: 'No token provided' })
 
-    const parts = authHeader.split(' ')
+    const parts = authorization.split(' ')
 
     if (!parts.length === 2)
         return res.status(400).send({ error: 'Token error' })
@@ -18,10 +18,21 @@ module.exports = (req, res, next) => {
     if (!/^Bearer$/i.test(scheme))
         return res.status(400).send({ error: 'Malformatted token' })
 
-    jwt.verify(token, authConfig.secret, (err, decoded) => {
+    jwt.verify(token, secret, (err, decoded) => {
         if (err) return res.status(401).send({ error: 'Invalid token' })
 
-        res.userId = decoded.id
+        return callback(decoded, next)
+    })
+}
+
+exports.adminContentAccess = (req, res, next) => {
+    verifyToken(req, res, next, process.env.ADMIN_SESSION_SECRET, (decoded, next) => {
+        return next()
+    })
+}
+
+exports.adminRegistrationCode = (req, res, next) => {
+    verifyToken(req, res, next, process.env.ADMIN_REGISTER_SECRET, (decoded, next) => {
         return next()
     })
 }

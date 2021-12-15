@@ -1,3 +1,3 @@
 const Admin = require('./admin')
 
-exports.Admin = Admin
+exports.AdminModel = Admin
